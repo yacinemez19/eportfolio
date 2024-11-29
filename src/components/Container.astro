@@ -4,13 +4,12 @@ import AccordionLayout from "../layouts/AccordionLayout.astro";
 import * as about from "../pages/about/about.md";
 import Card from "./Card.astro";
 import ContactCard from "./ContactCard.astro";
-const works = await Astro.glob("../pages/works/*.md");
-const projects = await Astro.glob("../pages/projects/*.md");
+const activities = await Astro.glob("../pages/activities/*.md");
 const studies = await Astro.glob("../pages/studies/*.md");
-const certificates = await Astro.glob("../pages/certificates/*.md");
-const blogs = await Astro.glob("../pages/blogs/*.md");
+const mobility = await Astro.glob("../pages/mobility/*.md");
 const contact = await Astro.glob("../pages/contact/*.md");
-const PDF = "/cv-20240219.pdf";
+const PDF = "/cv-fr.pdf";
+const PDFEN = "/cv-en.pdf"
 ---
 
 <div class="join join-vertical gap-1">
@@ -18,11 +17,12 @@ const PDF = "/cv-20240219.pdf";
     <article class="text-justify">
       <Fragment set:html={about.compiledContent()} />
     </article>
+
   </AccordionLayout>
 
-  <AccordionLayout title={"Work"} icon={"carbon:construction"}>
+  <AccordionLayout title={"Engineering course"} icon={"carbon:education"}>
     {
-      works.map((item) => {
+      studies.map((item) => {
         return (
           <Card
             title={item.frontmatter.title}
@@ -38,110 +38,109 @@ const PDF = "/cv-20240219.pdf";
     }
   </AccordionLayout>
 
-  <AccordionLayout title={"Studies"} icon={"carbon:education"}>
+  <AccordionLayout title={"International Mobility"} icon={"carbon:plane"}>
     {
-      studies.map((item) => {
-        return (
-          <Card
-            title={item.frontmatter.title}
-            timeframe={item.frontmatter.date}
-            location={item.frontmatter.location}
-            tags={item.frontmatter.tags}
-            url={item.url}
-            url_name={item.frontmatter.institute}
-          />
-        );
-      })
-    }
-  </AccordionLayout>
-
-  <AccordionLayout title={"Projects"} icon={"carbon:tools"}>
-    {
-      projects.map((item) => {
+      mobility.map((item) => {
         return (
           <Card
             title={item.frontmatter.title}
             timeframe={item.frontmatter.date}
             description={item.compiledContent()}
-            tags={item.frontmatter.tags}
-            url={item.frontmatter.url}
-            url_name={"View project"}
           />
         );
       })
     }
   </AccordionLayout>
 
-  <AccordionLayout title={"Certifications"} icon={"carbon:certificate"}>
+  <AccordionLayout title={"Sustainability & Civic Engagement"} icon={"carbon:friendship"}>
+  </AccordionLayout>
+
+  <AccordionLayout title={"Sport & other activities"} icon={"carbon:basketball"}>
     {
-      certificates.map((item) => {
+      activities.map((item) => {
         return (
           <Card
-            title={item.frontmatter.title}
-            timeframe={item.frontmatter.date}
+            title={item.frontmatter.title}          
             description={item.compiledContent()}
-            tags={item.frontmatter.tags}
-            url={item.frontmatter.url}
-            url_name={"View Certificate"}
           />
         );
       })
     }
   </AccordionLayout>
 
-  <AccordionLayout title={"Blogs"} icon={"carbon:pen"}>
-    {
-      blogs.map((item) => {
-        return (
-          <Card
-            title={item.frontmatter.title}
-            timeframe={item.frontmatter.date}
-            description={item.compiledContent()}
-            url={item.frontmatter.url}
-            url_name={item.frontmatter.url_name}
-          />
-        );
-      })
-    }
-  </AccordionLayout>
+  <AccordionLayout title={"Career Development"} icon={"carbon:construction"}>
+    
+    <style>
+      /* Container pour centrer la vidéo */
+      .video-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 20px 0; /* Espace autour de la vidéo */
+      }
+  </style>
+  <div class="video-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/fKU967XeXF8?si=Sgmlp9hNM58R28-B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
 
-  <AccordionLayout title={"Files"} icon={"carbon:volume-file-storage"}>
-    <div class="flex justify-center w-full">
-      <div
-        class="card card-compact card-bordered border-[oklch(var(--s))] w-96 md:w-112 lg:w-128 hover:shadow-lg transition-all"
-      >
-        <figure>
-          <object data={PDF} type="application/pdf" width="100%"></object>
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title">Resume</h2>
-          <p>View and download my resume by clicking on the button below</p>
-          <div class="card-actions justify-end">
-            <a target="_blank" href={PDF}>
-              <button class="btn btn-outline">
-                <p>Download resume</p>
-                <Icon name="carbon:document-pdf" class="w-6 h-6 ml-1" />
-              </button>
-            </a>
-          </div>
+  <div class="flex justify-center w-full flex-wrap gap-8"> <!-- Ajout de flex-wrap et gap -->
+    <div
+      class="card card-compact card-bordered border-[oklch(var(--s))] w-80 md:w-96 lg:w-96 hover:shadow-lg transition-all"
+    >
+      <figure>
+        <object data={PDFEN} type="application/pdf" width="100%"></object>
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">English resume</h2>
+        <p>View and download my resume by clicking on the button below</p>
+        <div class="card-actions justify-end">
+          <a target="_blank" href={PDFEN}>
+            <button class="btn btn-outline">
+              <p>Download resume</p>
+              <Icon name="carbon:document-pdf" class="w-6 h-6 ml-1" />
+            </button>
+          </a>
         </div>
       </div>
     </div>
+
+
+    <div
+      class="card card-compact card-bordered border-[oklch(var(--s))] w-80 md:w-96 lg:w-96 hover:shadow-lg transition-all"
+    >
+      <figure>
+        <object data={PDF} type="application/pdf" width="100%"></object>
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">French resume</h2>
+        <p>View and download my resume by clicking on the button below</p>
+        <div class="card-actions justify-end">
+          <a target="_blank" href={PDF}>
+            <button class="btn btn-outline">
+              <p>Download resume</p>
+              <Icon name="carbon:document-pdf" class="w-6 h-6 ml-1" />
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="flex flex-wrap content-around gap-4 justify-center">
+    {
+      contact.map((item) => {
+        return (
+          <ContactCard
+            url={item.frontmatter.url}
+            url_name={item.frontmatter.title}
+            icon={item.frontmatter.icon}
+          />
+        );
+      })
+    }
+  </div>
+
+    
   </AccordionLayout>
 
-  <AccordionLayout title={"Contact"} icon={"carbon:location-person"}>
-    <div class="flex flex-wrap content-around gap-4 justify-center">
-      {
-        contact.map((item) => {
-          return (
-            <ContactCard
-              url={item.frontmatter.url}
-              url_name={item.frontmatter.title}
-              icon={item.frontmatter.icon}
-            />
-          );
-        })
-      }
-    </div>
-  </AccordionLayout>
 </div>
